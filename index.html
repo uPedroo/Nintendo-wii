@@ -26,6 +26,28 @@
         font-family: 'Continuum-Medium';
         src: url('./fonts/continuum/contm.ttf') format('truetype');
     }
+
+    @media (prefers-color-scheme: dark) {
+    html, body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        filter: none !important;
+    }
+}
+
+/* Remove qualquer filtro de inversão de cor */
+html {
+    filter: none !important;
+    -webkit-filter: none !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Desabilita modos de alto contraste que invertem as cores */
+* {
+    forced-color-adjust: none !important;
+    -webkit-font-smoothing: antialiased;
+}
     
 
 :root {
