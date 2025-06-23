@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo Wii</title>
+    <link rel="icon" href="./imgs/Wii_logo.svg" type="image/svg+xml">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+    @font-face {
+        font-family: 'Continuum-Bold';
+        src: url('./fonts/continuum/contb.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Continuum-Light';
+        src: url('./fonts/continuum/contl.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Continuum-Medium';
+        src: url('./fonts/continuum/contm.ttf') format('truetype');
+    }
+    
+
+:root {
+    /* MOBILE */
+    --tamanho-titulo: 32px;
+    --tamanho-subtitulo: 22px;
+    --tamanho-fonte: 14px;
+
+    --cor-fundo: #ffffff;
+    --cor-secundaria: #00B5E2;
+    --cor-texto: #000000;
+
+    --fonte-titulo: 'Continuum-Bold', sans-serif;
+    --fonte-subtitulo: 'Continuum-Medium', sans-serif;
+    --fonte-texto: 'Outfit', sans-serif;
+}
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-image: url(./imgs/fundo.svg);
+        color: var(--cor-texto);
+        background-size: cover; /* cobre a tela inteira */
+        background-repeat: no-repeat; /* não repete */
+        background-position: center; /* centraliza */
+        background-attachment: fixed; /* efeito fixo no scroll (opcional) */
+    }
+
+    /* Cabeçalho */
+    .cabecalho {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: none;
+        padding: 10px 20px;
+    }
+
+    .logo {
+        width: 60px;
+        height: auto;
+    }
+
+    .botao_start {
+        width: 50px;
+        height: auto;
+        cursor: pointer;
+        position: relative;
+        z-index: 1101; /* Maior que o menu */
+        transition: transform 0.2s ease, filter 0.3s ease;
+    }
+
+    .botao_start.ativo {
+        transform: scale(0.9);
+    }
+
+    /* Menu */
+    .menu {
+        position: fixed;
+        top: 5px;
+        right: -90%;
+        width: 250px;
+        height: 250px;
+        border-radius: 10px;
+        background-color: var(--cor-secundaria);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        gap: 40px;
+        transition: right 0.5s ease;
+        z-index: 1000;
+    }
+
+    #menu-btn {
+        transition: transform 0.2s ease, filter 0.3s ease;
+    }
+
+    #menu-btn.ativo {
+        transform: scale(0.9);
+        filter: brightness(1.6) saturate(1.2);
+
+    }
+
+
+    .menu.ativo {
+        right: 0;
+    }
+
+    .menu a {
+        color: var(--cor-fundo);
+        text-decoration: none;
+        font-family: var(--fonte-titulo);
+        font-size: 24px;
+        position: relative;
+    }
+
+    .menu a::after {
+        content: '';
+        position: absolute;
+        width: 0%;
+        height: 3px;
+        background-color: var(--cor-fundo);
+        bottom: -5px;
+        left: 0;
+        transition: width 0.3s;
+    }
+
+    .menu a:hover::after {
+        width: 100%;
+    }
+
+    /* Conteúdo Geral */
+    .centralizar_caixa {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin-top: 20px;
+        text-align: center;
+        align-items: center;
+        gap: 5%;
+    }
+
+    .centralizar_caixa_vertical {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 20px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .titulo {
+        color: var(--cor-secundaria);
+        font-family: var(--fonte-titulo);
+        font-size: var(--tamanho-titulo);
+    }
+
+    .titulo_2 {
+        color: var(--cor-fundo);
+        font-family: var(--fonte-titulo);
+        font-size: var(--tamanho-titulo);
+    }
+
+    .branco {
+        color: var(--cor-secundaria);
+        font-family: var(--fonte-titulo);
+        font-size: var(--tamanho-subtitulo);
+    }
+
+    .branco_2 {
+        color: var(--cor-fundo);
+        font-family: var(--fonte-titulo);
+        font-size: var(--tamanho-subtitulo);
+    }
+
+    .textos {
+        color: var(--cor-texto);
+        font-family: var(--fonte-texto);
+        font-size: var(--tamanho-fonte);
+        text-align: justify;
+    }
+
+    .textos_2 {
+        color: var(--cor-fundo);
+        font-family: var(--fonte-texto);
+        font-size: var(--tamanho-fonte);
+        text-align: justify;
+    }
+
+    .caixa_vertical {
+        width: 95vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .caixa_horizontal {
+        width: 95vw;
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .caixa_horizontal p{
+        width: 95vw;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        text-align: justify;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+
+    .caixa {
+        width: 95vw;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .caixa_wii {
+        width: 90vw;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        padding: 10px;
+    }
+
+
+    .caixa p{
+        width: 95vw;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: justify;
+    }
+
+    .imagem {
+        transition: 0.3s ease;
+    }
+
+    .imagem:hover {
+        transform: scale(1.1);
+    }
+
+    main {
+        background-color: var(--cor-secundaria);
+        width: 100vw;
+        padding: 20px 0;
+        margin-top: 10%;
+    }
+
+    .tamanho{
+        display: flex;
+        justify-content: center;
+        width: 220px;
+        height: auto;
+        margin-bottom: 10%;
+    }
+
+    .tamanho_2{
+        display: flex;
+        justify-content: center;
+        width: 260px;
+        height: auto;
+    }
+
+    .cds{
+        background-color: var(--cor-fundo);
+        border-radius: 10px;
+        padding: 10px 18px; /* Respiro interno */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    }
+
+    .cds_2{
+        background-color: var(--cor-secundaria);
+        border-radius: 10px;
+        padding: 5px 10px; /* Respiro interno */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra leve */
+    }
+
+    /* Responsividade */
+/* TABLET */
+@media (min-width: 768px) {
+    :root {
+        --tamanho-titulo: 44px;
+        --tamanho-subtitulo: 34px;
+        --tamanho-fonte: 18px;
+    }
+
+    .logo {
+        width: 90px;
+        height: auto;
+    }
+
+    .botao_start {
+        width: 70px;
+        height: 75px;
+    }
+
+    .caixa, .caixa_horizontal, .caixa_vertical {
+        width: 670px;
+        gap: 50px;
+    }
+
+    .caixa_horizontal {
+        gap: 60px;
+    }
+
+    .caixa p,
+    .caixa_horizontal p {
+        width: 430px;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    .tamanho {
+        width: 260px;
+    }
+
+    .tamanho_2 {
+        width: 300px;
+    }
+
+    .cds {
+        padding: 18px 25px;
+    }
+
+    main {
+        margin-top: 5%;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1280px) {
+    :root {
+        --tamanho-titulo: 54px;
+        --tamanho-subtitulo: 42px;
+        --tamanho-fonte: 22px;
+    }
+
+    .logo {
+        width: 140px;
+        height: auto;
+    }
+
+    .botao_start {
+        width: 90px;
+        height: 95px;
+    }
+
+    .caixa, .caixa_horizontal, .caixa_vertical {
+        width: 870px;
+        gap: 70px;
+    }
+
+    .caixa_horizontal {
+        gap: 100px;
+    }
+
+    .caixa p,
+    .caixa_horizontal p {
+        width: 600px;
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+
+    .tamanho {
+        width: 320px;
+    }
+
+    .tamanho_2 {
+        width: 370px;
+    }
+
+    .cds {
+        padding: 22px 35px;
+    }
+
+    main {
+        margin-top: 4%;
+    }
+}
+
+</style>
+
+<header>
+    <div class="cabecalho">
+        <img class="logo" src="./imgs/wii_logo.svg" alt="Logo Wii">
+        <img class="botao_start" id="menu-btn" src="./imgs/botao_start.svg" alt="Menu">
+    </div>
+
+    <nav class="menu" id="menu">
+        <a href="#sobre">Sobre</a>
+        <a href="#jogos">Jogos de Sucesso</a>
+        <a href="#curiosidades">Curiosidades</a>
+    </nav>
+</header>
+
+<body>
+
+    <!-- Sobre -->
+    <div class="centralizar_caixa_vertical" id="sobre">
+            <img class="imagem tamanho" src="./imgs/bonecos_wii.svg">
+            <div class="caixa">
+                <h1 class="titulo">Nintendo Wii</h1>
+                <p class="textos">
+                O Nintendo Wii foi lançado em 19 de novembro de 2006 nos Estados Unidos (e em dezembro de 2006 no Brasil), sendo a proposta da Nintendo para a sétima geração de consoles. Em vez de competir com gráficos potentes como o PS3 e Xbox 360, o Wii focou em inovação na jogabilidade, acessibilidade e público amplo  incluindo famílias, idosos e pessoas que nunca haviam jogado antes.                </p>
+            </div>
+    </div>
+
+    <div class="centralizar_caixa" id="ficha_tecnica">
+        <div class="caixa">
+            <h2 class="branco">Detalhes Técnicos</h2>
+            <img class="imagem tamanho_2" src="./imgs/Detalhes técnicos.svg">
+            <img class="imagem" src="./imgs/ficha_tecnica.svg">
+        </div>
+    </div>
+
+
+    <!-- Gráfico de Vendas -->
+    <div class="centralizar_caixa" id="grafico">
+        <div class="caixa">
+            <h2 class="branco">Gráfico de Vendas</h2>
+            <img class="imagem" src="./imgs/grafico.svg">
+        </div>
+    </div>
+
+    <!-- Jogos de Sucesso -->
+    <main id="jogos">
+<div class="centralizar_caixa" id="wii_sports">
+    <div class="caixa">
+        <h1 class="titulo_2">Jogos de Sucesso</h1>
+        <h2 class="branco_2">WII SPORTS - 82 MILHÕES VENDIDOS</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/resort_wii.svg">
+        <p class="textos_2">
+        Lançado em 2006 como jogo incluso no console, Wii Sports revolucionou a forma como as pessoas jogavam videogame. Em vez de botões tradicionais, o jogador usava o movimento do corpo para jogar tênis, boliche, boxe e mais.</p>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <p class="textos_2">
+Com controles simples e acessíveis, tornou-se o primeiro contato com jogos eletrônicos para milhões de pessoas, desde crianças até idosos. Sua popularidade foi tão grande que o jogo ultrapassou 80 milhões de cópias, entrando para a história como símbolo da interatividade e da união familiar nos games.        </p>
+        <img class="imagem cds" src="./imgs/wii_imagem.svg">
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa">
+            <h2 class="branco_2">JUST DANCE - 26 MILHÕES VENDIDOS </h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa" id="Just_dance">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/Just_dance.svg">
+        <p class="textos_2">
+        Estreando em 2009, Just Dance foi uma surpresa que transformou o Wii em pista de dança. O jogador segurava o controle e imitava os passos dos dançarinos na tela, tudo com músicas pop contagiantes e visuais coloridos.                </p>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <p class="textos_2">
+Apesar de parecer simples, virou um fenômeno nas festas e reuniões familiares. A série se tornou anual, e até hoje é sinônimo de dança e descontração. Foi um dos maiores sucessos casuais do Wii, mostrando como o console conseguia atrair pessoas que nunca tinham jogado antes.</p>
+        <img class="imagem cds" src="./imgs/cds_just_dance.svg">
+    </div>
+</div>
+
+<div class="centralizar_caixa" id="Mario_kart">
+    <div class="caixa">
+            <h2 class="branco_2">MARIO KART - 37 MILHÕES VENDIDOS </h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/Mario_kart.svg">
+        <p class="textos_2">
+        Lançado em 2008, Mario Kart Wii elevou o caos das corridas com itens malucos e pistas criativas a um novo nível. Introduziu o controle de direção usando o Wii Wheel, onde o jogador podia literalmente virar o controle como um volante.
+        </p>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <p class="textos_2">
+Com mais de 37 milhões de cópias vendidas, foi um dos maiores sucessos do console. Suporte para 12 jogadores online, personagens novos (como Rosalina) e motos como novidade garantiram corridas ainda mais intensas. É lembrado até hoje por sua diversão acessível e competitivo para todas as idades
+        </p>
+        <img class="imagem cds" src="./imgs/mario_wario.svg">
+    </div>
+</div>
+
+<div class="centralizar_caixa" id="Wii_fit">
+    <div class="caixa">
+            <h2 class="branco_2">WII FIT - 22 MILHÕES VENDIDOS</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/wii_fit.svg">
+        <p class="textos_2">
+            Lançado em 2007, Wii Fit foi mais que um jogo virou uma revolução no bem-estar digital. Com a Wii Balance Board, o jogador realizava exercícios de equilíbrio, yoga, aeróbica e treinos físicos.        </p>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <p class="textos_2">
+            Era possível acompanhar o progresso, definir metas e até calcular o IMC. Usado por pessoas de todas as idades, inclusive em fisioterapia e academias, Wii Fit transformou o videogame em aliado da saúde, quebrando o estereótipo de que jogos são só para lazer.        </p>
+        <img class="imagem cds" src="./imgs/Bonecos_esticando.svg">
+    </div>
+</div>
+</main>
+
+    <!-- Curiosidades -->
+<div class="centralizar_caixa" id="curiosidades">
+    <div class="caixa">
+        <h1 class="titulo">Curiosidades</h1>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa">
+            <h2 class="branco_2 cds_2" id="Nome_wii">Um nome, Um impacto</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_wii">
+        <h2 class="branco">Por que Wii?</h2>
+        <p class="textos">
+            Quando a Nintendo anunciou o nome Wii, muitos acharam estranho mas ele foi pensado para representar a ideia de “jogar junto” (como o pronome we, “nós” em inglês).
+        </p>
+    </div>
+    <img class="imagem cds_2" src="./imgs/Wee.svg">
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa">
+            <h2 class="branco_2 cds_2">Um console para todos</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <p class="textos">
+ A empresa queria que o console fosse acessível a todos: famílias, idosos e até pessoas que nunca haviam jogado antes. E funcionou. O nome virou símbolo de uma geração que redescobriu os videogames de forma mais social e divertida.        </p>
+    </div>
+</div>
+
+<div class="centralizar_caixa" id="portados">
+    <div class="caixa">
+            <h2 class="branco_2 cds_2">Jogos "PORTADOS" do Wii</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/Controle.svg">
+        <p class="textos">
+            Por ter um hardware mais fraco que PS3 e Xbox 360, o Wii recebeu versões adaptadas de vários jogos com gráficos simplificados, recursos removidos ou controles ajustados para o Wii Remote. Isso ficou conhecido como “Portados”.
+        </p>
+    </div>
+</div>
+
+<main>
+<div class="centralizar_caixa">
+    <div class="caixa">
+        <img class="imagem" src="./imgs/quarteto.svg">
+    </div>
+</div>
+
+</main>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <p class="textos">
+            Exemplos incluem Resident Evil 4, Need for Speed, Mortal Kombat e House of the Dead. Mesmo com menos efeitos, muitos continuaram divertidos, provando que o Wii usava criatividade em vez de potência.
+        </p>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa">
+            <h2 class="branco_2 cds_2" id="re4">Destaque Especial</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/leon.svg">
+        <p class="textos">
+            Mesmo com gráficos mais simples, a versão de Resident Evil 4 para o Wii se destacou como a mais popular entre os “capados”. Com controles de movimento que tornaram a mira mais precisa e envolvente, ela foi aclamada por fãs e crítica. Até hoje, muitos consideram essa a melhor forma de jogar o clássico da Capcom no estilo survival horror.
+        </p>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa">
+            <h2 class="branco_2 cds_2">Fim de uma era</h2>
+    </div>
+</div>
+
+<div class="centralizar_caixa">
+    <div class="caixa_horizontal">
+        <img class="imagem" src="./imgs/Controle.svg">
+        <p class="textos">
+            A produção do Nintendo Wii foi encerrada oficialmente em 29 de outubro de 2013, após vender mais de 101 milhões de unidades no mundo todo. Seu legado continua através do Wii U e da vasta comunidade de fãs que mantém o console vivo até hoje.
+        </p>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('ativo');
+        menu.classList.toggle('ativo');
+    });
+
+    document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            btn.classList.remove('ativo');
+            menu.classList.remove('ativo');
+        });
+    });
+</script>
+</body>
+
+</html>
