@@ -36,11 +36,18 @@
 }
 
 /* Remove qualquer filtro de inversão de cor */
-html, body, main {
+html, body {
     filter: none !important;
     -webkit-filter: none !important;
     background-color: #ffffff !important;
     color: #000000 !important;
+}
+
+main{
+    filter: none !important;
+    -webkit-filter: none !important;
+    background-color: var(--cor-secundaria) !important;
+    color: var(--cor-fundo) !important; 
 }
 
 /* Desabilita modos de alto contraste que invertem as cores */
